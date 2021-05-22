@@ -4,9 +4,10 @@ import {RouterModule} from '@angular/router';
 
 import {ROUTES as APP_ROUTES} from './app.routing';
 import {AppComponent} from './app.component';
-import {CdMethodsNestedModule} from './examples/cd-methods-nested/cd-methods-nested.module';
-import {CdMethodsProjectedModule} from './examples/cd-methods-projeced/cd-methods-projected.module';
-import {ViewVsEmbeddedViewModule} from './examples/template-vs-embedded-view/view-vs-embedded-view.module';
+import {CdMethodsNestedModule} from "./examples/cd-methods-nested/cd-methods-nested.module";
+import {CdMethodsProjectedModule} from "./examples/cd-methods-projeced/cd-methods-projected.module";
+import { CdMethodsNestedRegularModule } from './examples/cd-methods-regular/cd-methods-nested.module'
+import {ViewVsEmbeddedViewModule} from "./examples/template-vs-embedded-view/view-vs-embedded-view.module";
 import {ComponentBoundariesModule} from './examples/component-boundaries/component-boundaries.module';
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ComponentBoundariesModule} from './examples/component-boundaries/compone
     CdMethodsNestedModule,
     CdMethodsProjectedModule,
     ViewVsEmbeddedViewModule,
-    ComponentBoundariesModule
+    ComponentBoundariesModule,
+    CdMethodsNestedRegularModule
   ],
   providers: [],
   bootstrap: [AppComponent]

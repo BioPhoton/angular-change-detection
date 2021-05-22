@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
   <h1></h1>
   <ul>
+    <li routerLink="cd-methods-regular">CD Nested regular</li>
     <li routerLink="cd-methods-nested">CD Nested</li>
     <li routerLink="cd-methods-projected">CD Projected</li>
     <li routerLink="template-vs-embedded-view">CD Template vs EmbeddedView</li>
