@@ -18,12 +18,12 @@ import {
         <button (click)="justClick()">
           just click
         </button>
-        <button (click)="cdr.markForCheck()">
-          markForCheck
-        </button>
-        <button (click)="cdr.detectChanges()">
-          detectChanges
-        </button>
+<!--        <button (click)="cdr.markForCheck()">-->
+<!--          markForCheck-->
+<!--        </button>-->
+<!--        <button (click)="cdr.detectChanges()">-->
+<!--          detectChanges-->
+<!--        </button>-->
       </div>
     </div>
 

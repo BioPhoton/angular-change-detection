@@ -12,12 +12,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulatio
         <button (click)="justClick()">
           just click
         </button>
-        <button (click)="cdr.markForCheck()">
-          markForCheck
-        </button>
-        <button (click)="cdr.detectChanges()">
-          detectChanges
-        </button>
+<!--        <button (click)="cdr.markForCheck()">-->
+<!--          markForCheck-->
+<!--        </button>-->
+<!--        <button (click)="cdr.detectChanges()">-->
+<!--          detectChanges-->
+<!--        </button>-->
       </div>
     </div>
   `,
