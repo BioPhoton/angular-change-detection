@@ -1,21 +1,35 @@
-import { Component } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, NgZone } from '@angular/core'
+import { NavigationEnd, Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
   template: `
-  <h1></h1>
-  <ul>
-    <li routerLink="cd-methods-regular">CD Nested regular</li>
-    <li routerLink="cd-methods-needed">CD methods needed</li>
-    <li routerLink="cd-methods-regular">CD Nested native</li>
-    <li routerLink="cd-methods-nested">CD Nested</li>
-    <li routerLink="cd-methods-projected">CD Projected</li>
-    <li routerLink="template-vs-embedded-view">CD Template vs EmbeddedView</li>
-    <li routerLink="component-boundaries">CD Componet Boundaries</li>
-  </ul>
-  <router-outlet></router-outlet>
-  `
+    <h1></h1>
+    <ul>
+      <button routerLink="requirements">Requirements</button>
+      <button routerLink="cd-task">Task</button>
+    </ul>
+    <router-outlet></router-outlet>
+  `,
+  styles: [`button {
+  margin-left: 10px;
+  }
+  ul {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }`]
 })
 export class AppComponent {
 
+  constructor(
+    private cd: ChangeDetectorRef, private router: Router) { }
+
+  ngOnInit() {
+    //this.router.events.subscribe(e => {
+    //  if (e instanceof NavigationEnd) {
+    //    this.cd.detectChanges()
+    //  }
+    //})
+  }
 }

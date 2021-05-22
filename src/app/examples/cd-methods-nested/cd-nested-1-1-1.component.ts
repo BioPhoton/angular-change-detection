@@ -15,7 +15,7 @@ import {
         <h3>Default</h3>
         <dirty-check></dirty-check>
         <hr/>
-        <button (click)="cdr.markForCheck()">
+        <button [unpatch]  (click)="cdr.markForCheck()">
           markForCheck
         </button>
         <button [unpatch] (click)="cdr.detectChanges()">

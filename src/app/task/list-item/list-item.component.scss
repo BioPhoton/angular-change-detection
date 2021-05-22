@@ -1,0 +1,22 @@
+.row {
+  padding: 0 5px;
+  margin: 0 5px 0 0;
+  display: inline-block;
+  border-left: 1px solid gray;
+
+  &:first-child {
+    border-left: none;;
+  }
+}
+
+:host {
+  border: 1px solid black;
+  display: block;
+  padding: 5px 0;
+}
+
+.btn {
+  display: inline;
+  width: 140px;
+  white-space: nowrap;
+}
