@@ -6,6 +6,7 @@ import {ROUTES as APP_ROUTES} from './app.routing';
 import {AppComponent} from './app.component';
 import {CdMethodsNestedModule} from "./examples/cd-methods-nested/cd-methods-nested.module";
 import {CdMethodsProjectedModule} from "./examples/cd-methods-projeced/cd-methods-projected.module";
+import {ViewVsEmbeddedViewModule} from "./examples/template-vs-embedded-view/view-vs-embedded-view.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {CdMethodsProjectedModule} from "./examples/cd-methods-projeced/cd-method
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
     CdMethodsNestedModule,
-    CdMethodsProjectedModule
+    CdMethodsProjectedModule,
+    ViewVsEmbeddedViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
