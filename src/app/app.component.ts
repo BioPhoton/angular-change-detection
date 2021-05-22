@@ -7,9 +7,11 @@ import { Component } from '@angular/core';
   <ul>
     <li routerLink="cd-methods-regular">CD Nested regular</li>
     <li routerLink="cd-methods-needed">CD methods needed</li>
+    <li routerLink="cd-methods-regular">CD Nested native</li>
     <li routerLink="cd-methods-nested">CD Nested</li>
     <li routerLink="cd-methods-projected">CD Projected</li>
     <li routerLink="template-vs-embedded-view">CD Template vs EmbeddedView</li>
+    <li routerLink="component-boundaries">CD Componet Boundaries</li>
   </ul>
   <router-outlet></router-outlet>
   `
