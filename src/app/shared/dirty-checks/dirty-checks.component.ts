@@ -14,7 +14,6 @@ import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
     }`]
 })
 export class DirtyChecksComponent implements AfterViewInit {
-
   displayElem;
   dirtyChecks = 0;
 

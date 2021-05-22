@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {CdMethodsNestedComponent} from './examples/cd-methods-nested/cd-methods-nested.component';
 import {CdMethodsProjecedComponent} from './examples/cd-methods-projeced/cd-methods-projeced.component';
+import { CdMethodsRegularNestedComponent } from './examples/cd-methods-regular/cd-methods-nested.component'
 import {TemplateVsEmbeddedViewComponent} from "./examples/template-vs-embedded-view/template-vs-embedded-view.component";
 
 export const ROUTES: Routes = [
@@ -20,5 +21,9 @@ export const ROUTES: Routes = [
   {
     path: 'template-vs-embedded-view',
     component: TemplateVsEmbeddedViewComponent
+  },
+  {
+    path: 'cd-methods-regular',
+    component: CdMethodsRegularNestedComponent
   }
 ];
