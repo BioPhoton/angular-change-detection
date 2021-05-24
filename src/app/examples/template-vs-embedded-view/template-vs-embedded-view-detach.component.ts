@@ -15,12 +15,12 @@ import {scan} from 'rxjs/operators';
       <div class="row" style="margin-bottom: 1rem;">
         <div class="col-6">
           <button (click)="staticValue = staticValue+1">
-            Component: cdRef#detectChanges
+            update staticValue
           </button>
         </div>
         <div class="col-6">
           <button [unpatch] (click)="btn1Click$.next($event)">
-            EmbeddedView#detectChanges
+            update embeddedValue
           </button>
         </div>
       </div>
@@ -28,7 +28,7 @@ import {scan} from 'rxjs/operators';
         <div class="col-6">
           <div class="view">
             <div><strong>Basic value binding</strong></div>
-            <div>value: {{ staticValue }}</div>
+            <div>staticValue: {{ staticValue }}</div>
             <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
           </div>
         </div>
@@ -37,7 +37,7 @@ import {scan} from 'rxjs/operators';
           <div class="view embedded">
             <div><strong>EmbeddedViewRef *cdEmbeddedView</strong></div>
             <ng-container *cdEmbeddedView="value1$; let value; detach: true">
-              <div>value: {{ value }}</div>
+              <div>embeddedValue: {{ value }}</div>
               <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
             </ng-container>
           </div>
