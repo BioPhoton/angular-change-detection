@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 import {scan} from 'rxjs/operators';
 
 @Component({
-  selector: 'template-vs-embedded-view',
+  selector: 'template-vs-embedded-view-detach',
   template: `
     <h2>
       Component Template vs Embedded View
@@ -23,8 +23,8 @@ import {scan} from 'rxjs/operators';
       </div>
 
       <div class="col-6 view">
-        <h3>EmbeddedViewRef</h3>
-        <ng-container *cdEmbeddedView="value1$; let value">
+        <h3>EmbeddedViewRef Detached</h3>
+        <ng-container *cdEmbeddedView="value1$; let value; detach: true">
           <div>value: {{ value }}</div>
           <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
           <button [unpatch] (click)="btn1Click$.next($event)">
@@ -42,7 +42,7 @@ import {scan} from 'rxjs/operators';
     }
   `]
 })
-export class TemplateVsEmbeddedViewComponent {
+export class TemplateVsEmbeddedViewDetachComponent {
   btn1Click$ = new Subject<Event>();
   btn2Click$ = new Subject<Event>();
   value1$ = this.btn1Click$.pipe(

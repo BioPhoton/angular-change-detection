@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Directive, EmbeddedViewRef, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import { ObservableInput, ReplaySubject, Subscription, Unsubscribable } from 'rxjs';
 import { distinctUntilChanged, switchAll } from 'rxjs/operators';
@@ -17,8 +17,8 @@ export interface ViewContext<T> {
 })
 export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
   observables$ = new ReplaySubject(1);
-  viewContext = { $implicit: undefined};
-  embeddedView;
+  viewContext = { $implicit: undefined };
+  embeddedView: EmbeddedViewRef<any>;
   values$ = this.observables$
     .pipe(
       distinctUntilChanged(),
@@ -26,6 +26,7 @@ export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
     );
 
   @Input('cdEmbeddedViewDetach') detach = false;
+  @Input('cdEmbeddedViewLazy') lazy = false;
 
   @Input()
   set cdEmbeddedView(potentialObservable: ObservableInput<U> | null | undefined) {
@@ -43,16 +44,15 @@ export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.embeddedView = this.viewContainerRef.createEmbeddedView(
-      this.nextTemplateRef,
-      this.viewContext
-    );
-    if (this.detach) {
-      this.embeddedView.detach();
+    if (!this.lazy) {
+      this.createEmbeddedView();
     }
     this.subscription = this.values$
       .subscribe(
         v => {
+          if (!this.embeddedView) {
+            this.createEmbeddedView();
+          }
           this.viewContext.$implicit = v;
           this.embeddedView.detectChanges();
         }
@@ -60,8 +60,19 @@ export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.embeddedView.destroy();
+    this.viewContainerRef.clear();
     this.subscription.unsubscribe();
+  }
+
+  private createEmbeddedView(): void {
+    this.embeddedView = this.viewContainerRef.createEmbeddedView(
+      this.nextTemplateRef,
+      this.viewContext
+    );
+    if (this.detach) {
+      this.embeddedView.detach();
+      this.embeddedView.detectChanges();
+    }
   }
 
 }
