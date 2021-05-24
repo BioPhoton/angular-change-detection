@@ -15,16 +15,20 @@ import { scan, startWith } from 'rxjs/operators';
      <div class="row" style="margin-bottom: 1rem;">
        <div class="col-6">
          <button (click)="staticValue = staticValue+1">
-           Component: cdRef#detectChanges
+           Update staticValue
          </button>
        </div>
-       <div class="col-6"></div>
+       <div class="col-6">
+         <button (click)="embeddedValue = embeddedValue+1">
+           Update embeddedValue
+         </button>
+       </div>
      </div>
      <div class="row">
        <div class="col-4">
          <div class="view">
            <div><strong>Basic value binding</strong></div>
-           <div>value: {{ staticValue }}</div>
+           <div>staticValue: {{ staticValue }}</div>
            <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
          </div>
        </div>
@@ -32,8 +36,8 @@ import { scan, startWith } from 'rxjs/operators';
        <div class="col-4">
          <div class="view embedded">
            <div><strong>EmbeddedViewRef *ngIf</strong></div>
-           <ng-container *ngIf="staticValue">
-             <div>value: {{ staticValue }}</div>
+           <ng-container *ngIf="embeddedValue">
+             <div>embeddedValue: {{ embeddedValue }}</div>
              <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
            </ng-container>
          </div>
@@ -41,8 +45,8 @@ import { scan, startWith } from 'rxjs/operators';
        <div class="col-4">
          <div class="view embedded">
            <div><strong>EmbeddedViewRef *ngIf</strong></div>
-           <ng-container *ngIf="staticValue">
-             <div>value: {{ staticValue }}</div>
+           <ng-container *ngIf="embeddedValue">
+             <div>embeddedValue: {{ embeddedValue }}</div>
              <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
            </ng-container>
          </div>
@@ -70,6 +74,7 @@ export class TemplateVsEmbeddedViewBasicComponent {
   btn1Click$ = new Subject<Event>();
   btn2Click$ = new Subject<Event>();
   staticValue = 1;
+  embeddedValue = 1;
   value1$ = this.btn1Click$.pipe(
     scan(a => ++a, 0)
   );
