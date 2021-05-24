@@ -25,6 +25,8 @@ export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
       switchAll()
     );
 
+  @Input('cdEmbeddedViewDetach') detach = false;
+
   @Input()
   set cdEmbeddedView(potentialObservable: ObservableInput<U> | null | undefined) {
     this.observables$.next(potentialObservable);
@@ -40,22 +42,24 @@ export class CdEmbeddedViewDirective<U> implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.embeddedView = this.viewContainerRef.createEmbeddedView(
       this.nextTemplateRef,
       this.viewContext
     );
-
+    if (this.detach) {
+      this.embeddedView.detach();
+    }
     this.subscription = this.values$
       .subscribe(
         v => {
           this.viewContext.$implicit = v;
-          this.embeddedView.detectChanges()
+          this.embeddedView.detectChanges();
         }
       );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.embeddedView.destroy();
     this.subscription.unsubscribe();
   }

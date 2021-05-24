@@ -1,39 +1,42 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {scan, tap} from "rxjs/operators";
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { map, scan, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'component-boundaries',
   template: `
     <h1>Component Boundaries</h1>
+    <label style="display: block">Nesting level {{ depth }}</label>
+    <input type="range" min="2" max="25" [(ngModel)]="depth">
     <div class="row">
-      <div class="col">
-        <h2>Static</h2>
+      <div class="col-6">
+        <h2>Static value passthrough (NgZone included)</h2>
         <div class="mb-1">
           <button (click)="staticValInc()">
-            +
+            Change value
           </button>
         </div>
-        <comp-boundary-1 [value]="staticVal"></comp-boundary-1>
+        <nested-static [value]="staticVal" [depth]="depth"></nested-static>
       </div>
-      <div class="col">
-        <h2>Observable</h2>
+      <div class="col-6">
+        <h2>Observable passthrough</h2>
         <div>
-          <button (click)="observableVal.next(0)">
-            +
+          <button unpatch (click)="observableVal.next(0)">
+            Change value
           </button>
         </div>
-        <comp-boundary-2 [value]="observableVal$"></comp-boundary-2>
+        <nested-observable [value$]="observableVal$" [depth]="depth"></nested-observable>
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentBoundariesComponent {
 
+  depth = 5;
   staticVal = 0;
-  observableVal = new BehaviorSubject(0);
-  observableVal$ = this.observableVal.pipe(scan(a => ++a, 0), tap(console.log));
+  observableVal = new ReplaySubject(0);
+  observableVal$ = this.observableVal.pipe(scan(a => ++a, 0), shareReplay(1));
   staticValInc = () => ++this.staticVal;
 
 }

@@ -10,7 +10,7 @@ import {AfterViewInit, Component, ElementRef, Renderer2} from '@angular/core';
   `,
   styles: [`
     :host .indicator-ripple {
-      border: 1px solid #ffff005f;
+      border: 1px solid green;
     }`]
 })
 export class DirtyChecksComponent implements AfterViewInit {

@@ -8,36 +8,39 @@ import {scan} from 'rxjs/operators';
     <h2>
       Component Template vs Embedded View
     </h2>
-    <dirty-check></dirty-check>
+    <div>Parent component dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
     <hr/>
     <div>
-
-      <button (click)="btn2Click$.next($event)">
-        cdRef#detectChanges
-      </button>
-
-      <button [unpatch] (click)="btn1Click$.next($event)">
-        EmbeddedView cdRef#detectChanges
-      </button>
-
     </div>
     <div class="row">
-      <div class="col-sm-6">
-        <h3>async</h3>
-        <ng-container *ngIf="value2$ | async">
-          <dirty-check></dirty-check>
-        </ng-container>
+      <div class="col-6 view">
+        <h3>async pipe: part of component</h3>
+        <div>value: {{ value2$ | async }}</div>
+        <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
+        <button (click)="btn2Click$.next($event)">
+          cdRef#detectChanges
+        </button>
       </div>
 
-      <div class="col-sm-6">
-        <h3>*rxLet EmbeddedView cdRef#detectChanges</h3>
+      <div class="col-6 view">
+        <h3>EmbeddedViewRef</h3>
         <ng-container *cdEmbeddedView="value1$; let value">
-          <dirty-check></dirty-check>
+          <div>value: {{ value }}</div>
+          <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
+          <button [unpatch] (click)="btn1Click$.next($event)">
+            EmbeddedView cdRef#detectChanges
+          </button>
         </ng-container>
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [`
+    .view {
+      border: 1px solid green;
+      padding: 1rem;
+    }
+  `]
 })
 export class TemplateVsEmbeddedViewComponent {
   btn1Click$ = new Subject<Event>();
