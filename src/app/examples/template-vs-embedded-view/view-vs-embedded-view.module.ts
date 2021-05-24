@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdEmbeddedViewDirective } from './cdEmbeddedView.directive';
+import { TemplateVsEmbeddedViewBasicComponent } from './template-vs-embedded-view-basic.component';
 import { TemplateVsEmbeddedViewDetachComponent } from './template-vs-embedded-view-detach.component';
 import { TemplateVsEmbeddedViewLazyComponent } from './template-vs-embedded-view-lazy.component';
 import { TemplateVsEmbeddedViewComponent } from './template-vs-embedded-view.component';
@@ -12,7 +13,8 @@ import {DirtyChecksModule} from '../../shared/dirty-checks/dirty-checks.module';
     CdEmbeddedViewDirective,
     TemplateVsEmbeddedViewComponent,
     TemplateVsEmbeddedViewLazyComponent,
-    TemplateVsEmbeddedViewDetachComponent
+    TemplateVsEmbeddedViewDetachComponent,
+    TemplateVsEmbeddedViewBasicComponent
   ],
   imports: [
     CommonModule,

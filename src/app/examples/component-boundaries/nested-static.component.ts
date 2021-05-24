@@ -33,18 +33,14 @@ import { Observable } from 'rxjs';
 export class NestedStaticComponent {
 
   @HostBinding('style.paddingLeft.px')
-  get paddingLeft(): number {
-    return (this.total - this.level) * 5;
+  @HostBinding('style.paddingRight.px')
+  get padding(): number {
+    return (this.total - this.level);
   }
 
   @HostBinding('style.borderBottomWidth.px')
   get borderBottomWidth(): number {
     return this.level === (this.total - 1) ? 2 : 0;
-  }
-
-  private _rendered = 0;
-  get checked(): number {
-    return this._rendered++;
   }
 
   @Input()

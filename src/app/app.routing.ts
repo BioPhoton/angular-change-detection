@@ -4,6 +4,7 @@ import { CdNeededMainComponent } from './examples/cd-methods-needed/cd-needed-ma
 import {CdMethodsNestedComponent} from './examples/cd-methods-nested/cd-methods-nested.component';
 import {CdMethodsProjecedComponent} from './examples/cd-methods-projeced/cd-methods-projeced.component';
 import { CdMethodsRegularNestedComponent } from './examples/cd-methods-regular/cd-methods-nested.component'
+import { TemplateVsEmbeddedViewBasicComponent } from './examples/template-vs-embedded-view/template-vs-embedded-view-basic.component';
 import { TemplateVsEmbeddedViewDetachComponent } from './examples/template-vs-embedded-view/template-vs-embedded-view-detach.component';
 import { TemplateVsEmbeddedViewLazyComponent } from './examples/template-vs-embedded-view/template-vs-embedded-view-lazy.component';
 import {TemplateVsEmbeddedViewComponent} from "./examples/template-vs-embedded-view/template-vs-embedded-view.component";
@@ -34,6 +35,10 @@ export const ROUTES: Routes = [
   {
     path: 'template-vs-embedded-view/lazy',
     component: TemplateVsEmbeddedViewLazyComponent
+  },
+  {
+    path: 'template-vs-embedded-view/basic',
+    component: TemplateVsEmbeddedViewBasicComponent
   },
   {
     path: 'component-boundaries',

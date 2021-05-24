@@ -1,5 +1,15 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'nested-observable',
@@ -12,7 +22,8 @@ import { Observable } from 'rxjs';
           <div>Dirty Checks: <dirty-check-rounded></dirty-check-rounded></div>
         </div>
         <ng-container *ngIf="level === 0; else: branch">
-          <h3>Value: {{value$ | async | json}}</h3>
+          <!-- TODO: replace custom async with sub in component -->
+          <h3>Value: {{ renderValue }}</h3>
         </ng-container>
         <ng-template #branch>
           <nested-observable [total]="total" [level]="level-1" [value$]="value$"></nested-observable>
@@ -30,11 +41,12 @@ import { Observable } from 'rxjs';
     `
   ]
 })
-export class NestedObservableComponent {
+export class NestedObservableComponent implements OnChanges, OnDestroy {
 
   @HostBinding('style.paddingLeft.px')
-  get paddingLeft(): number {
-    return (this.total - this.level) * 5;
+  @HostBinding('style.paddingRight.px')
+  get padding(): number {
+    return (this.total - this.level);
   }
 
   @HostBinding('style.borderBottomWidth.px')
@@ -52,4 +64,24 @@ export class NestedObservableComponent {
   @Input() total: number;
   @Input() level: number;
   @Input() value$: Observable<any>;
+
+  private _sub = new Subscription();
+
+  renderValue: any;
+
+  constructor(private cdRef: ChangeDetectorRef) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this._sub.unsubscribe();
+    if (this.level === 0) {
+      this._sub = this.value$.subscribe(v => {
+        this.renderValue = v;
+        this.cdRef.detectChanges();
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this._sub.unsubscribe();
+  }
 }

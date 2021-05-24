@@ -3,12 +3,12 @@ import {Subject} from 'rxjs';
 import { scan, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'template-vs-embedded-view',
+  selector: 'template-vs-embedded-view-basic',
   template: `
    <div class="container">
      <h2>
        Component Template vs Embedded View
-       <small>Custom structural directive</small>
+       <small>Basic behavior</small>
      </h2>
      <div>Parent component dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
      <hr/>
@@ -18,14 +18,10 @@ import { scan, startWith } from 'rxjs/operators';
            Component: cdRef#detectChanges
          </button>
        </div>
-       <div class="col-6">
-         <button [unpatch] (click)="btn1Click$.next($event)">
-           EmbeddedView#detectChanges
-         </button>
-       </div>
+       <div class="col-6"></div>
      </div>
      <div class="row">
-       <div class="col-6">
+       <div class="col-4">
          <div class="view">
            <div><strong>Basic value binding</strong></div>
            <div>value: {{ staticValue }}</div>
@@ -33,11 +29,20 @@ import { scan, startWith } from 'rxjs/operators';
          </div>
        </div>
 
-       <div class="col-6">
+       <div class="col-4">
          <div class="view embedded">
-           <div><strong>EmbeddedViewRef *cdEmbeddedView</strong></div>
-           <ng-container *cdEmbeddedView="value1$; let value">
-             <div>value: {{ value }}</div>
+           <div><strong>EmbeddedViewRef *ngIf</strong></div>
+           <ng-container *ngIf="staticValue">
+             <div>value: {{ staticValue }}</div>
+             <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
+           </ng-container>
+         </div>
+       </div>
+       <div class="col-4">
+         <div class="view embedded">
+           <div><strong>EmbeddedViewRef *ngIf</strong></div>
+           <ng-container *ngIf="staticValue">
+             <div>value: {{ staticValue }}</div>
              <div>Dirty checks: <dirty-check-rounded></dirty-check-rounded></div>
            </ng-container>
          </div>
@@ -61,10 +66,10 @@ import { scan, startWith } from 'rxjs/operators';
     }
   `]
 })
-export class TemplateVsEmbeddedViewComponent {
+export class TemplateVsEmbeddedViewBasicComponent {
   btn1Click$ = new Subject<Event>();
   btn2Click$ = new Subject<Event>();
-  staticValue = 0;
+  staticValue = 1;
   value1$ = this.btn1Click$.pipe(
     scan(a => ++a, 0)
   );
